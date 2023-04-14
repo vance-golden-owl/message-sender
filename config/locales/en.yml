@@ -30,4 +30,14 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  enumerize: 
+    user: 
+      gender: 
+        male: "Male"
+        female: "Female"
+        transgender: "Transgender"
+        gender_neutral: "Gender neutral"
+        non_binary: "Non-binary"
+        agender: "Agender"
+        pangender: "Pangender"
+        other: "Other"

@@ -77,4 +77,8 @@ Rails.application.configure do
   # Letter Opener settings
   config.action_mailer.delivery_method = :letter_opener
   config.action_mailer.perform_deliveries = true
+
+  config.hosts << /[a-z0-9-]+\.ap\.ngrok\.io/
 end
+
+Rails.application.routes.default_url_options[:host] = 'localhost:3000'

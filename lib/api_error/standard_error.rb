@@ -1,29 +1,25 @@
 module APIError
   class StandardError < ::StandardError
-    attr_reader :title, :detail, :status, :source
+    attr_reader :message, :errors, :status, :code
 
-    def initialize(title: nil, detail: nil, status: nil, source: nil) # rubocop:disable Lint/MissingSuper
-      @title = title || 'Something went wrong'
-      @detail = detail || "We're sorry, but something went wrong"
-      @status = status || '500'
-      @source = source || {}
+    def initialize(message: nil, errors: [], status: nil, code: nil) # rubocop:disable Lint/MissingSuper
+      @message = message
+      @errors = errors
+      @status = status
+      @code = code
     end
 
-    def to_h
+    def to_hash
       {
-        title: title,
-        detail: detail,
+        message: message,
+        errors: errors,
         status: status,
-        source: source
-      }.compact_blank
+        code: code
+      }
     end
 
     def serializable_hash
-      to_h
-    end
-
-    def to_s
-      to_h.to_s
+      to_hash.compact_blank
     end
   end
 end

@@ -1,0 +1,14 @@
+html 
+  head 
+    meta content='text/html; charset=UTF-8' http-equiv='Content-Type'
+  body 
+    p 
+      = "Hi #{@user.name || "there"},"
+    p 
+      | There was a request to change your password!
+    p 
+      | If you did not make this request then please ignore this email.
+    p 
+      | Otherwise, please get the code below to change your password:
+    h1 
+      = @user.reset_password_token

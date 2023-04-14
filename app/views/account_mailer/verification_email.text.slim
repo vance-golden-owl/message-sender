@@ -1,0 +1,4 @@
+= "Hi #{@user.name || "there"},"
+| We're happy you signed up for GreenPoint. To start explore the app, please get the code below to confirm your email address:
+= @user.email_verification_token
+| Welcome to GreenPoint!

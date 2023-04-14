@@ -10,11 +10,19 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'bootsnap', require: false
 gem 'bcrypt'
 gem 'rack-cors'
-gem 'jsonapi-serializer'
+gem 'blueprinter'
 gem 'seedbank'
 gem 'pundit'
 gem 'pagy'
 gem 'jwt'
+gem 'sentry-ruby'
+gem 'sentry-rails'
+gem 'enumerize'
+gem 'image_processing', '>= 1.2'
+gem 'rolify'
+gem 'rswag'
+gem 'countries', '~> 5.3'
+gem 'slim'
 
 group :development, :test do
   gem 'debug', platforms: %i[mri mingw x64_mingw]

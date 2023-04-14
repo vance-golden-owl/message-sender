@@ -1,15 +1,14 @@
 module Auth
   class LoginUserService < ApplicationService
-    attr_reader :email, :password
+    attr_reader :user_params, :strategy
 
-    def initialize(email, password)
-      @email = email
-      @password = password
+    def initialize(user_params, strategy)
+      @user_params = user_params
+      @strategy = strategy
     end
 
     def call
-      user = User.find_by(email: email)
-      user&.authenticate(password) || raise(APIError::NotAuthenticatedError, 'Invalid email or password')
+      strategy.authenticate(user_params)
     end
   end
 end

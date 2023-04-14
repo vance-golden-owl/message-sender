@@ -1,24 +1,30 @@
 module APIError
   class RecordInvalidError < StandardError
-    def initialize(errors = []) # rubocop:disable Lint/MissingSuper
-      @errors = errors
-      @status = '422'
-      @title = 'Unprocessable Entity'
+    def initialize(errors = [])
+      super(
+        message: 'Unprocessable Entity',
+        errors: errors,
+        status: 422
+      )
     end
 
     def serializable_hash
-      errors.reduce([]) do |memo, error|
-        memo << {
-          title: title,
-          detail: error.full_message,
-          status: status,
-          source: { pointer: "/data/attributes/#{error.attribute}" }
-        }
-      end
+      {
+        message: message,
+        status: status,
+        errors: serializable_errors(errors)
+      }
     end
 
     private
 
-    attr_reader :errors
+    def serializable_errors(errors)
+      errors.reduce([]) do |memo, error|
+        memo << {
+          field: error.attribute,
+          message: error.full_message
+        }
+      end
+    end
   end
 end

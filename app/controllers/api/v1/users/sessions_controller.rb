@@ -5,14 +5,25 @@ module API
         skip_before_action :authenticate_user!, only: :create
 
         def create
-          user = Auth::LoginUserService.call(user_params[:email], user_params[:password])
-          render_resource(user, serializer: AuthUserSerializer)
+          strategy = {
+            email: Auth::Local.new,
+            apple: Auth::Apple.new,
+            google: Auth::Google.new
+          }[user_params[:provider]&.to_sym]
+
+          unless strategy
+            render_api_error(APIError::BadRequestError.new('Provider is invalid'))
+            return
+          end
+
+          user = Auth::LoginUserService.call(user_params, strategy)
+          render_resource(user, view: :auth)
         end
 
         private
 
         def user_params
-          params.require(:user).permit(:email, :password)
+          params.require(:user).permit(:provider, :email, :password, :google_uid, :apple_uid)
         end
       end
     end

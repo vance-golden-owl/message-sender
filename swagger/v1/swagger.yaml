@@ -1,0 +1,195 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/api/v1/users/signup":
+    post:
+      summary: Signup user
+      tags:
+      - Authentications
+      parameters: []
+      responses:
+        '201':
+          description: Signup successfully
+        '422':
+          description: Unprocessable Entity
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: object
+                  properties:
+                    email:
+                      type: string
+                      example: example@gmail.com
+                    password:
+                      type: string
+                      example: examplepassword
+                    phone_code:
+                      type: string
+                      example: '84'
+                    phone_number:
+                      type: string
+                      example: '365204546'
+                    role:
+                      type: string
+                      example: shop_owner
+                      description: 'Add role for user when create account, for normal
+                        user, this parameter is not necesssary. Currently avalaible
+                        role: shop_owner'
+                  required:
+                  - email
+                  - password
+  "/api/v1/users/verify":
+    post:
+      summary: Verify user's email
+      tags:
+      - Authentications
+      parameters: []
+      responses:
+        '200':
+          description: Email verified successfully
+        '404':
+          description: Token invalid
+        '401':
+          description: Token expired
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                verification_token:
+                  type: string
+                  example: '112233'
+                  description: 6 character code
+              required:
+              - verification_token
+  "/api/v1/users/login":
+    post:
+      summary: Login user
+      tags:
+      - Authentications
+      parameters: []
+      responses:
+        '200':
+          description: Login successfully
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: object
+                  properties:
+                    email:
+                      type: string
+                      example: user-1@gorails.com
+                    password:
+                      type: string
+                      example: password123
+                    google_uid:
+                      type: string
+                    apple_uid:
+                      type: string
+                    provider:
+                      type: string
+                      example: email
+                      description: 'choose between these 3: email/google/apple'
+                  required:
+                  - email
+  "/api/v1/users/me":
+    get:
+      summary: Get profile of user
+      tags:
+      - Authentications
+      security:
+      - Bearer: {}
+      responses:
+        '200':
+          description: User profile retrieved successfully
+        '401':
+          description: Unauthorized
+  "/api/v1/users/forgot_password":
+    post:
+      summary: Send reset password code to user's email
+      tags:
+      - Passwords
+      parameters: []
+      responses:
+        '204':
+          description: Email sent
+        '404':
+          description: Email not exist in database
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: example@gmail.com
+              required:
+              - email
+  "/api/v1/users/reset_password":
+    post:
+      summary: Reset password according to new input password and code
+      tags:
+      - Passwords
+      parameters: []
+      responses:
+        '200':
+          description: Password changed
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                reset:
+                  type: object
+                  properties:
+                    verification_token:
+                      type: string
+                      example: '112233'
+                      description: 6 character code
+                    new_password:
+                      type: string
+                      example: newpassword123
+                      description: Must at least 8 character long
+              required:
+              - email
+              - new_password
+  "/api/v1/users/token/refresh":
+    get:
+      summary: Get new access token for user
+      tags:
+      - Tokens
+      security:
+      - Bearer: {}
+      responses:
+        '200':
+          description: New access token retrieved
+        '401':
+          description: Unauthorized
+servers:
+- url: "{defaultHost}"
+  variables:
+    defaultHost:
+      default: https://example.com
+components:
+  securitySchemes:
+    Bearer:
+      description: 'Value Format: "Bearer user_access_token"'
+      type: apiKey
+      name: Authorization
+      in: header

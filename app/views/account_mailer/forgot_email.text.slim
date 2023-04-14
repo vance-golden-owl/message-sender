@@ -1,0 +1,5 @@
+= "Hi #{@user.name || "there"},"
+| There was a request to change your password!
+| If you did not make this request then please ignore this email.
+| Otherwise, please get the code below to change your password:
+= @user.reset_password_token

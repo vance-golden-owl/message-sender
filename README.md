@@ -7,6 +7,7 @@ Ruby On Rails API simple starter template :goat: :goat: :goat:.
 - Ruby version: `ruby 3.1.2`
 - Rails version: `rails 7.0.3`
 - Database: `postgresql`
+- API Document: Swagger ([rswag gem](https://github.com/rswag/rswag))
 
 ## Installation
 
