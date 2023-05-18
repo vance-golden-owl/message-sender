@@ -9,10 +9,7 @@ module Auth
 
     def call
       user = User.create!(params)
-      case role
-      when 'shop_owner'
-        user.add_role :shop_owner
-      end
+
       user
     end
   end

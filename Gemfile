@@ -23,6 +23,7 @@ gem 'rolify'
 gem 'rswag'
 gem 'countries', '~> 5.3'
 gem 'slim'
+gem 'devise'
 
 group :development, :test do
   gem 'debug', platforms: %i[mri mingw x64_mingw]

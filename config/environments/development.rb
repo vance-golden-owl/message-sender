@@ -63,7 +63,7 @@ Rails.application.configure do
   # config.action_cable.disable_request_forgery_protection = true
 
   # Action mailer default url
-  config.action_mailer.default_url_options = { host: ENV['APP_HOST'] }
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 
   # Bullet settings
   config.after_initialize do
