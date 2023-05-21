@@ -30,13 +30,6 @@ class User < ApplicationRecord
   rolify
   has_secure_password
 
-  # constants
-  GENDERS = %i[male female transgender gender_neutral non_binary agender pandeger other].freeze
-
-  # attributes
-  enumerize :gender, in: GENDERS
-  enumerize :nationality_code, in: ISO3166::Country.codes
-
   # validations
   validates :email, presence: true,
                     uniqueness: { case_sensitive: false },
@@ -45,10 +38,6 @@ class User < ApplicationRecord
 
   def auth_token
     JsonWebToken.encode(user_id: id)
-  end
-
-  def nationality
-    ISO3166::Country.new(nationality_code)
   end
 
   def generate_email_verification_token!

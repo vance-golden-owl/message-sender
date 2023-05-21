@@ -7,12 +7,6 @@ class AddDeviseToUsers < ActiveRecord::Migration[7.0]
       t.string :email,              null: false, default: ""
       t.string :encrypted_password, null: false, default: ""
 
-      t.string :google_uid, index: true
-      t.string :apple_uid, index: true
-      t.string :gender
-      t.date :dob
-      t.string :phone_code
-      t.string :phone_number
       t.datetime :email_verified_at
       t.string :email_verification_token
       t.datetime :email_verification_sent_at
