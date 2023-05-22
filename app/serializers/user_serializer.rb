@@ -27,13 +27,7 @@
 #
 class UserSerializer < ApplicationSerializer
   fields :email,
-         :name,
-         :dob,
-         :gender,
-         :nationality_code,
-         :email_verified_at,
-         :phone_code,
-         :phone_number
+         :email_verified_at
 
   view :auth do
     fields :auth_token
