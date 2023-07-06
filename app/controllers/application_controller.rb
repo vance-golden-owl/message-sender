@@ -4,4 +4,6 @@ class ApplicationController < ActionController::API
 
   include ExceptionFilter
   include JSONAPIRender
+
+  attr_reader :current_user
 end

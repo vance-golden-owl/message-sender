@@ -26,5 +26,7 @@ module GoRailsApi
 
     # Auto load libs dir
     config.autoload_paths << Rails.root.join('lib')
+
+    config.time_zone = 'UTC'
   end
 end

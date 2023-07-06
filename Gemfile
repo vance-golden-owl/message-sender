@@ -22,6 +22,8 @@ gem 'image_processing', '>= 1.2'
 gem 'rswag'
 gem 'countries', '~> 5.3'
 gem 'slim'
+gem 'geocoder'
+gem 'timezone', '~> 1.0'
 
 group :development, :test do
   gem 'debug', platforms: %i[mri mingw x64_mingw]
