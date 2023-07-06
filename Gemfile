@@ -24,6 +24,8 @@ gem 'countries', '~> 5.3'
 gem 'slim'
 gem 'geocoder'
 gem 'timezone', '~> 1.0'
+gem 'sidekiq', '~> 6.5'
+gem 'sidekiq-scheduler', '~> 5.0', '>= 5.0.2'
 
 group :development, :test do
   gem 'debug', platforms: %i[mri mingw x64_mingw]
