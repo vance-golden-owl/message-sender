@@ -31,4 +31,8 @@ class User < ApplicationRecord
     latitude, longitude = Geocoder.search(address).first.coordinates
     self.timezone_name = Timezone.lookup(latitude, longitude)
   end
+
+  def full_name
+    [first_name, last_name].join(' ')
+  end
 end
