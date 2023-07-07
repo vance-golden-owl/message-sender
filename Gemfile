@@ -50,3 +50,5 @@ group :test do
   gem 'shoulda-matchers'
   gem 'webmock'
 end
+
+gem "dockerfile-rails", ">= 1.5", :group => :development
