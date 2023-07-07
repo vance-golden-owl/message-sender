@@ -9,6 +9,13 @@ Ruby On Rails API simple starter template :goat: :goat: :goat:.
 - Database: `postgresql`
 - API Document: Swagger ([rswag gem](https://github.com/rswag/rswag))
 
+## Application Information
+
+- [Database Diagram](https://drive.google.com/file/d/1HXJ5eW9ctzKT9IfO6jssKKb_xmzu5Ncq/view?usp=sharing)
+- [Architecture Diagram](https://drive.google.com/file/d/1O2E8DyFmr1w6t9MoALT-W-4GjsDfSgOh/view?usp=sharing)
+- [API document](https://message-sender.fly.dev/api-docs/index.html)
+- Test coverage: 94.8%
+
 ## Installation
 
 - Install correct ruby version for our project: `rbenv local 3.1.2`
