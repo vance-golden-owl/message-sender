@@ -42,6 +42,10 @@ Lint/MissingSuper:
 Lint/UselessAccessModifier:
   Enabled: false
 
+Lint/EmptyBlock:
+  Exclude:
+    - spec/requests/api/v1/*.rb
+
 Style/AndOr:
   Enabled: false
 

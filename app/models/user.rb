@@ -17,6 +17,8 @@
 #  index_users_on_timezone_name  (timezone_name)
 #
 class User < ApplicationRecord
+  attr_accessor :skip_generate_timezone_name
+
   # validations
   validates :first_name, presence: true
   validates :last_name, presence: true

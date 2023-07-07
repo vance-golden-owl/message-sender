@@ -1,4 +1,5 @@
 require 'enumerize/integrations/rspec'
+require 'webmock/rspec'
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|

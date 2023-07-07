@@ -3,9 +3,14 @@ module API
     class UsersController < BaseController
       before_action :prepare_user, only: %i[show update destroy]
 
+      def index
+        pagy, users = paginate(User.all)
+
+        render_resource_collection(users, pagy: pagy)
+      end
+
       def create
         user = User.new(user_params)
-        authorize(user)
         user.save!
 
         render_resource(user)
@@ -31,7 +36,6 @@ module API
 
       def prepare_user
         @user = User.find(params[:id])
-        authorize(@user)
       end
 
       def user_params
