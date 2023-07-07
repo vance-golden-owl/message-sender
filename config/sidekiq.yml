@@ -1,5 +1,5 @@
 :scheduler:
   :schedule:
     send_birthdate_messages:
-      cron: '*/15 * * * *'
+      cron: '0 0 * * *'
       class: Schedulers::SendBirthdateMessagesScheduler

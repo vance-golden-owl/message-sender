@@ -5,20 +5,28 @@ module Schedulers
     include Sidekiq::Worker
 
     def perform
-      users = User.all
+      users = User.today_birthday
 
       users.find_each do |user|
-        uri = URI(ENV['HOOKBIN_ENDPOINT'])
+        message = "Hey, #{user.full_name} it's your birthday"
+        time_to_send = generate_send_time(user.timezone_name)
 
-        request = Net::HTTP::Post.new(uri, 'Content-Type' => 'application/json')
-        request.body = {
-          message: "Hey, #{user.full_name} it's your birthday"
-        }.to_json
-
-        Net::HTTP.start(uri.hostname, uri.port, use_ssl: uri.scheme == 'https') do |http|
-          http.request(request)
-        end
+        SendMessageJob.set(wait_until: time_to_send).perform_later(message)
       end
+    end
+
+    private
+
+    def generate_send_time(timezone_name)
+      local_time = Time.find_zone(timezone_name)
+      day = local_time.now.day
+      month = local_time.now.month
+      year = local_time.now.year
+      send_time = local_time.local(year, month, day, 9)
+
+      return send_time unless send_time < Time.current.beginning_of_day
+
+      send_time + 1.day
     end
   end
 end

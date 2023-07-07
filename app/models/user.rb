@@ -27,6 +27,9 @@ class User < ApplicationRecord
   # callbacks
   before_validation :generate_timezone_name, if: :address_changed?
 
+  # scopes
+  scope :today_birthday, -> { where('EXTRACT(month FROM birthdate) = ? AND EXTRACT(day FROM birthdate) = ?', Date.current.month, Date.current.day) }
+
   def generate_timezone_name
     latitude, longitude = Geocoder.search(address).first.coordinates
     self.timezone_name = Timezone.lookup(latitude, longitude)
